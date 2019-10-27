@@ -1,33 +1,83 @@
-/**
- * Layout component that queries for data
- * with Gatsby's StaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/static-query/
- */
-
 import React from "react"
-import PropTypes from "prop-types"
-import { StaticQuery, graphql } from "gatsby"
+import { Link } from "gatsby"
 
-import Header from "./header"
-import "./layout.css"
+import { rhythm, scale } from "../utils/typography"
 
-const Layout = ({ children }) => (
-  <div style={{ backgroundColor: '#FAFBFC' }}>
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `0px 1.0875rem 1.45rem`,
-        paddingTop: 0
-      }}>
-      <main>{children}</main>
-    </div>
-  </div>
-)
+class Layout extends React.Component {
+  render() {
+    const { location, title, children } = this.props
+    const rootPath = `${__PATH_PREFIX__}/`
+    let header
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+    if (location.pathname === rootPath) {
+      header = (
+        <h1
+          style={{
+            ...scale(1.5),
+            marginBottom: rhythm(1.5),
+            marginTop: 0,
+          }}
+        >
+          <Link
+            style={{
+              boxShadow: `none`,
+              textDecoration: `none`,
+              color: `inherit`,
+            }}
+            to={`/`}
+          >
+            {title}
+          </Link>
+        </h1>
+      )
+    } else {
+      header = (
+        <h3
+          style={{
+            marginTop: 0,
+          }}
+        >
+          <Link
+            style={{
+              boxShadow: `none`,
+              textDecoration: `none`,
+              color: `inherit`,
+            }}
+            to={`/`}
+          >
+            {title}
+          </Link>
+        </h3>
+      )
+    }
+    return (
+      <div
+        style={{
+          marginLeft: `auto`,
+          marginRight: `auto`,
+          maxWidth: rhythm(26),
+          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+        }}
+      >
+        <header>{header}</header>
+        <main>{children}</main>
+        <footer>
+          <div style={{
+            marginTop: rhythm(1),
+            display: 'flex'
+          }}>
+            <a href={`https://github.com/calintamas`}>
+              <small>github</small>
+            </a>
+            <div style={{ width: 10 }} />
+            <a href={`https://twitter.com/calintamas2`}>
+              <small>twitter</small>
+            </a>
+          </div>
+        </footer>
+      </div>
+    )
+  }
 }
 
 export default Layout

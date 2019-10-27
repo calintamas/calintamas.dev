@@ -1,21 +1,74 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 
+import Bio from "../components/bio"
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
-import styles from "./index.module.css"
+import { rhythm } from "../utils/typography"
 
-const IndexPage = () => (
-  <div className={styles.container}>
-    <SEO title="Home" />
-    <h1 style={{fontSize: '50px'}}>Hello <span role='img' aria-label="Wave">👋</span></h1>
-    <div className={styles.footer}>
-      <a href='https://github.com/calintamas'>github</a>
-      <a href='https://twitter.com/calintamas2'>twitter</a>
-      <a href=''>resume</a>
-    </div>
-  </div>
-)
+class BlogIndex extends React.Component {
+  render() {
+    const { data } = this.props
+    const siteTitle = data.site.siteMetadata.title
+    const posts = data.allMarkdownRemark.edges
 
-export default IndexPage
+    return (
+      <Layout location={this.props.location} title={siteTitle}>
+        <SEO title="All posts" />
+        {posts.map(({ node }) => {
+          const title = node.frontmatter.title || node.fields.slug
+          return (
+            <article key={node.fields.slug}>
+              <header>
+                <div style={{ display: 'flex', flexDirection: 'column', margin: '12px 0' }}>
+                  <h3
+                    style={{
+                      marginBottom: 0,
+                      display: 'inline',
+                      marginRight: '10px'
+                    }}
+                  >
+                    <Link style={{ textDecoration: 'none', boxShadow: `none` }} to={node.fields.slug}>
+                      {title}
+                    </Link>
+                  </h3>
+                  <time
+                    style={{ fontSize: 12.8 }}
+                    dateTime={node.frontmatter.date}>{node.frontmatter.date}
+                  </time>
+                </div>
+              </header>
+            </article>
+          )
+        })}
+      </Layout>
+    )
+  }
+}
+
+export default BlogIndex
+
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      edges {
+        node {
+          excerpt
+          fields {
+            slug
+          }
+          frontmatter {
+            date(formatString: "MMMM DD, YYYY")
+            title
+            description
+          }
+        }
+      }
+    }
+  }
+`

@@ -1,23 +1,17 @@
-import Typography from "typography"
+import Typography from 'typography';
 
 const typography = new Typography({
-  baseFontSize: "16px",
+  baseFontSize: '16px',
   baseLineHeight: 1.666,
   googleFonts: [
     {
-      name: 'Nunito Sans',
-      styles: ['400']
+      name: 'Hind Madurai',
+      styles: ['400', '700']
     }
   ],
-  headerFontFamily: [
-    'Nunito Sans',
-    'sans-serif'
-  ],
-  bodyFontFamily: [
-    'Nunito Sans',
-    'sans-serif'
-  ],
-  overrideStyles: ({ adjustFontSizeTo, rhythm }, options, styles) => ({
+  headerFontFamily: ['Hind Madurai', 'sans-serif'],
+  bodyFontFamily: ['Hind Madurai', 'sans-serif'],
+  overrideStyles: () => ({
     a: {
       color: '#333'
     },
@@ -25,13 +19,13 @@ const typography = new Typography({
       color: '#333'
     }
   })
-})
+});
 
 // Hot reload typography in development.
 if (process.env.NODE_ENV !== `production`) {
-  typography.injectStyles()
+  typography.injectStyles();
 }
 
-export default typography
-export const rhythm = typography.rhythm
-export const scale = typography.scale
+export default typography;
+export const { rhythm } = typography;
+export const { scale } = typography;

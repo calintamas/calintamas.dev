@@ -32,7 +32,7 @@ const BlogIndex = (props) => {
                   }}>
                   <Link
                     style={{ textDecoration: 'none', boxShadow: `none` }}
-                    to={node.fields.slug}>
+                    to={node.frontmatter.slug}>
                     {title}
                   </Link>
                 </h3>
@@ -66,6 +66,7 @@ export const pageQuery = graphql`
             date(formatString: "MMM DD, YYYY")
             title
             description
+            slug
           }
         }
       }

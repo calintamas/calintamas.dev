@@ -1,20 +1,22 @@
-/**
- * atom-dark theme for `prism.js`
- * Based on Atom's `atom-dark` theme: https://github.com/atom/atom-dark-syntax
- * @author Joe Gibson (@gibsjose)
+/*
+
+Name:       Base16 Tomorrow Dark
+Author:     Chris Kempson (http://chriskempson.com)
+
+Prism template by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/prism/)
+Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)
+
  */
 
-code[class*='language-'],
-pre[class*='language-'] {
-  color: #c5c8c6;
-  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
-  font-family: Inconsolata, Monaco, Consolas, 'Courier New', Courier, monospace;
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #ffffff;
+  font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
+  font-size: 13px;
+  line-height: 1.375;
   direction: ltr;
   text-align: left;
-  white-space: pre;
   word-spacing: normal;
-  word-break: normal;
-  line-height: 1.5;
 
   -moz-tab-size: 4;
   -o-tab-size: 4;
@@ -24,32 +26,32 @@ pre[class*='language-'] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
+  white-space: pre;
+  white-space: pre-wrap;
+  background: #1d1f21;
+  color: #fff;
 }
 
 /* Code blocks */
-pre[class*='language-'] {
+pre[class*="language-"] {
   padding: 1em;
-  margin: 0.5em 0;
+  margin: .5em 0;
   overflow: auto;
-  border-radius: 0.3em;
-}
-
-:not(pre) > code[class*='language-'],
-pre[class*='language-'] {
-  background: #1d1f21;
 }
 
 /* Inline code */
-:not(pre) > code[class*='language-'] {
-  padding: 0.1em;
-  border-radius: 0.3em;
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  background: #f4f4f4;
+  color: #1d1f21
 }
 
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #7c7c7c;
+  color: #969896;
 }
 
 .token.punctuation {
@@ -57,90 +59,66 @@ pre[class*='language-'] {
 }
 
 .namespace {
-  opacity: 0.7;
+  opacity: .7;
 }
 
-.token.property,
-.token.keyword,
-.token.tag {
-  color: #96cbfe;
-}
-
-.token.class-name {
-  color: #ffffb6;
-  text-decoration: underline;
-}
-
+.token.null,
+.token.operator,
 .token.boolean,
-.token.constant {
-  color: #99cc99;
-}
-
-.token.symbol,
-.token.deleted {
-  color: #f92672;
-}
-
 .token.number {
-  color: #ff73fd;
+  color: #de935f;
 }
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-  color: #a8ff60;
+.token.property {
+  color: #f0c674;
 }
-
-.token.variable {
-  color: #c6c5fe;
+.token.tag {
+  color: #81a2be;
 }
-
-.token.operator {
-  color: #ededed;
+.token.string {
+  color: #8abeb7;
 }
-
-.token.entity {
-  color: #ffffb6;
-  /* text-decoration: underline; */
+.token.selector {
+  color: #b294bb;
 }
-
-.token.url {
-  color: #96cbfe;
+.token.attr-name {
+  color: #de935f;
 }
-
+.token.entity,
+.token.url,
 .language-css .token.string,
 .style .token.string {
-  color: #87c38a;
+  color: #8abeb7;
 }
 
-.token.atrule,
-.token.attr-value {
-  color: #f9ee98;
+.token.attr-value,
+.token.keyword,
+.token.control,
+.token.directive,
+.token.unit {
+  color: #b5bd68;
 }
 
-.token.function {
-  color: #dad085;
+.token.statement,
+.token.regex,
+.token.atrule {
+  color: #8abeb7;
 }
 
-.token.regex {
-  color: #e9c062;
+.token.placeholder,
+.token.variable {
+  color: #81a2be;
 }
 
 .token.important {
-  color: #fd971f;
-}
-
-.token.important,
-.token.bold {
+  color: #cc6666;
   font-weight: bold;
-}
-.token.italic {
-  font-style: italic;
 }
 
 .token.entity {
   cursor: help;
+}
+
+pre > code.highlight {
+  outline: .4em solid red;
+  outline-offset: .4em;
 }

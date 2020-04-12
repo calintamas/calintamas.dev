@@ -35,7 +35,7 @@ pre[class*="language-"] {
 /* Code blocks */
 pre[class*="language-"] {
   padding: 1em;
-  margin: .5em 0;
+  margin-bottom: 1.5em 0;
   overflow: auto;
 }
 
@@ -54,6 +54,7 @@ pre[class*="language-"] {
   color: #969896;
 }
 
+.token.operator,
 .token.punctuation {
   color: #c5c8c6;
 }
@@ -63,26 +64,25 @@ pre[class*="language-"] {
 }
 
 .token.null,
-.token.operator,
 .token.boolean,
 .token.number {
-  color: #de935f;
+  color: #ffbb8d;
 }
 .token.property {
   color: #f0c674;
 }
 .token.tag {
-  color: #81a2be;
+  color: #ffa4a3;
 }
+
+.token.attr-name,
 .token.string {
   color: #8abeb7;
 }
 .token.selector {
   color: #b294bb;
 }
-.token.attr-name {
-  color: #de935f;
-}
+
 .token.entity,
 .token.url,
 .language-css .token.string,
@@ -95,7 +95,7 @@ pre[class*="language-"] {
 .token.control,
 .token.directive,
 .token.unit {
-  color: #b5bd68;
+  color: #8abeb7;
 }
 
 .token.statement,
@@ -109,16 +109,25 @@ pre[class*="language-"] {
   color: #81a2be;
 }
 
-.token.important {
-  color: #cc6666;
-  font-weight: bold;
-}
-
 .token.entity {
   cursor: help;
+}
+
+.token.function {
+  color: #f47775
 }
 
 pre > code.highlight {
   outline: .4em solid red;
   outline-offset: .4em;
+}
+
+.gatsby-highlight-code-line {
+  background-color: #282a2d;
+  display: block;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
+  border-left: 0.25em solid #f27575;
 }

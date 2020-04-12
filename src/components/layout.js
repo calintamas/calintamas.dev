@@ -64,10 +64,6 @@ const Layout = (props) => {
             <small>github</small>
           </a>
           <div style={{ width: 10 }} />
-          <a href='https://twitter.com/calintamas2'>
-            <small>twitter</small>
-          </a>
-          <div style={{ width: 10 }} />
           <a href='mailto:calinntamas@gmail.com' target='_top'>
             <small>contact</small>
           </a>

@@ -116,14 +116,26 @@ on:
     types: [upload-to-codepush]
 
 jobs:
-  build:
+  upload-to-codepush:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       with:
         ref: ${{ github.event.client_payload.ref }}
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12
+    - run: npm install -g yarn
+    - run: npm install -g appcenter-cli
+    - name: Setup kernel for react native, increase watchers
+      run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+    - name: Install dependencies
+      run: yarn
+    - name: AppCenter login
+      run: appcenter login --token ${{ secrets.APPCENTER_TOKEN }}
     - name: Create and upload bundle
-      run: upload-to-codepush.sh
+      run: ./upload-to-codepush.sh ${{ github.event.client_payload.codepush_args }}
 ```
 
 ```bash
@@ -131,12 +143,12 @@ jobs:
 
 #!/usr/bin/env bash
 
-echo "Bundling for STAGING"
+echo "Create and upload bundle to staging"
 
 # android
-appcenter codepush release-react -a ogranzation/android-app -d Staging
+appcenter codepush release-react -a ogranzation/android-app -d Staging $@
 # ios
-appcenter codepush release-react -a ogranzation/ios-app -d Staging
+appcenter codepush release-react -a ogranzation/ios-app -d Staging $@
 
 if [ $? -eq 0 ]
 then
@@ -150,13 +162,14 @@ fi
 To trigger the workflow
 
 ```sh
-$ curl -XPOST -u "calintamas" \
+curl -XPOST -u "calintamas" \
   -H "Content-Type: application/json" \
   https://api.github.com/repos/organization/repo-name/dispatches \
-  --data '{"event_type": "upload-to-codepush", "client_payload": {"ref": "release/1.1.0"}}'
+  --data '{"event_type": "upload-to-codepush", "client_payload": {"ref": "release/1.1.0", "codepush_args": "--target-binary-version 1.1.0 --mandatory --description v2"}}'
 
 Enter host password for user 'calintamas': <YOUR PASS>
 ```
+I can also create a [personal access token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line#creating-a-token) to use from the command line (instead of my password).
 
 Now that we have this, let's see how we can make a `production` hotfix.
 
